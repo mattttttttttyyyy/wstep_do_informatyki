@@ -19,3 +19,9 @@ po wykonaniu komendy do kompilacji zostanie utworzony plik (domyślnie a.out)
 ```
 ./a.out
 ```
+
+## Aby od razu skompilować kod i uruchomić:
+
+```
+g++ bubblesort/bubblesort.cpp && ./a.out
+```
