@@ -38,7 +38,10 @@ int computeScore(char* word)
         char upperedChar = toupper(word[i]);
         // Final score is the result of summing operation on every point obtained from the subtraction operation
         // Uppered char i subtracted from the first letter of alphabet which gives us the position of the letter in alphabet
-        score += POINTS[upperedChar - 'A'];
+        int currentPoints = POINTS[upperedChar - 'A'];
+        printf("Obecna litera = %c i punkty za literę = %i i uzyje punktu na pozycji = %i \n", upperedChar, currentPoints, upperedChar - 'A');
+        score += currentPoints;
+        //90 - 65 = 25
     }
 
     return score;
