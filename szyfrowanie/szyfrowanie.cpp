@@ -20,7 +20,7 @@ int main( )
   int mode = 0;
 
   while (mode != 1 && mode != 2) {
-    cout << "Podaj tryb: 1 - szyfruj, 2 - deszyfruj: ";
+    cout << "Podajj tryb: 1 - szyfruj, 2 - deszyfruj: ";
 
     cin >> mode;
   }
