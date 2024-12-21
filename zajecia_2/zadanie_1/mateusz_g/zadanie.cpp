@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+#include <unordered_map>
 
 // This array's length is equal to english alphabet's length (0-25)
 const int POINTS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
@@ -41,18 +42,21 @@ int computeScore(char* word)
 
     for (int i = 0, length = strlen(word); i < length; i++)
     {
-        // Every character of passed word is turned to uppercase
         char upperedChar = toupper(word[i]);
-        // Final score is the result of summing operation on every point obtained from the subtraction operation
-        // Uppered char i subtracted from the first letter of alphabet which gives us the position of the letter in alphabet
-        int currentPoints = POINTS[upperedChar - 'A'];
-        printf("Obecna litera = %c i punkty za literę = %i i uzyje punktu na pozycji = %i \n", upperedChar, currentPoints, upperedChar - 'A');
-        score += currentPoints;
-        //90 - 65 = 25
+
+        // Użycie metody at() zamiast operatora []
+        try {
+            int currentPoints = POINTS_MAP.at(upperedChar);
+            printf("Obecna litera = %c i punkty za literę = %i\n", upperedChar, currentPoints);
+            score += currentPoints;
+        } catch (const std::out_of_range& e) {
+            printf("Litera '%c' nie istnieje w mapie punktów.\n", upperedChar);
+        }
     }
 
     return score;
 }
+
 
 // Prints game title using ASCII art
 void printGameTitle()
