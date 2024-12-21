@@ -23,8 +23,9 @@ cout<<"Nie ma wystarczająco dużo środków na koncie. Proszę wybrać kwotę m
 } else {
    return stan_konta;
 }
-
+return 0;
 }
+
 double wplac_pieniadze(double stan_konta, double kwota)
 {
 stan_konta += kwota;
