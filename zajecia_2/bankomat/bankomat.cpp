@@ -2,26 +2,47 @@
 // Kod aplikacji:
 // C++
 #include <iostream>
+#include <string>
+
 using namespace std;
 
-const int PIN = 1234;
+string PIN = "1234";
 const double STAN_KONTA = 1000.0;
 
-bool sprawdz_PIN(int wprowadzony_PIN)
+bool sprawdz_PIN(string wprowadzony_PIN)
 {
+    cout << "OBECNY_PIN: " << PIN << endl;
     return wprowadzony_PIN == PIN;
 }
 
 bool zmien_PIN()
 {
-    int wprowadzony_PIN;
+    string wprowadzony_PIN;
     cout << "Prosze podac PIN: ";
     cin >> wprowadzony_PIN;
     if (sprawdz_PIN(wprowadzony_PIN))
     {
-        
-        cout << "Prosze podac nowy PIN"
-        cin >> wprowadzony_PIN;
+        string nowy_PIN;
+
+        cout << "Prosze podac nowy PIN: ";
+        cin >> nowy_PIN;
+
+        if (nowy_PIN.length() != 4)
+        {
+            cout << "PIN powinien zawierać 4 cyfry." << endl;
+            return false;
+        }
+
+        string *pPIN = &PIN;
+        *pPIN = nowy_PIN;
+
+        cout << "Kod PIN został zmieniony." << endl;
+        return true;
+    }
+    else
+    {
+        cout << "Podany PIN jest niepoprawny." << endl;
+        return false;
     }
 }
 
@@ -53,11 +74,12 @@ double wplac_pieniadze(double stan_konta, double kwota)
 
 int main()
 {
-    int wprowadzony_PIN;
+    string wprowadzony_PIN;
     double stan_konta = STAN_KONTA;
     int wybor;
     double kwota;
     int proby = 3;
+
     while (proby > 0)
     {
         cout << "Prosze podac PIN: ";
@@ -106,13 +128,21 @@ int main()
             stan_konta = wplac_pieniadze(stan_konta, kwota);
             break;
         case 4:
-        cout << "Podaj dotychczasowy kod PIN" case 5:
+            zmien_PIN();
+            break;
+        case 5:
             cout << "Dziękuję za skorzystanie z bankomatu." << endl;
             break;
         default:
             cout << "Nieprawidłowa opcja, proszę wybrać jeszcze raz (1-4)." << endl;
         }
-    } while (wybor != 4);
+    } while (wybor != 5 && wybor != 4);
+
+    if (wybor == 4)
+    {
+        main();
+    }
+
     return 0;
 }
 
